@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+  crossorigin="anonymous"
+/>
+<style>
+  body {
+    background: #e8f8f5;
+  }
+  .jumbotron {
+    background: #e8f8f5;
+  }
+  .list-group-item {
+    padding: 3px 10px;
+    background: #e8f8f5;
+  }
+  .list-group {
+    display: inline-block;
+  }
+  #access {
+    margin-bottom: 50px;
+  }
+
+  /* #bookInfo {
+    background: #d6eaf8;
+  } */
+
+  .btn-secondary,
+  .btn-secondary:hover,
+  .btn-secondary:active,
+  .btn-secondary:visited {
+    background-color: #ffa500;
+  }
+</style>
+<title>NYT Bestsellers</title>
+<body>
+  <!--Nav Bar-->
+  <nav class="navbar navbar-expand-sm fixed-top navbar-dark bg-dark text-light">
+    <a class="navbar-brand" href="#">
+      <img src="nyt_logo.png" alt="" style="width: 200px;" />
+    </a>
+    <h1 class="display-4">NYT Bestseller Visualization</h1>
+  </nav>
+
+  <!--Jumbotron-->
+  <div class="jumbotron bg-white text-dark">
+    <p class="text-muted">
+      Watch the rankings of 20 books that appeared the most number of times on
+      the New York Times Bestsellers List between 2008 to 2018!
+    </p>
+  </div>
+
+  <div class="alert alert-primary" role="alert">
+    <h4 class="alert-heading">How it works</h4>
+    <p>
+      Watch the change in rankings of 20 books that appeared the most number of
+      times on the New York Times Bestsellers List!
+    </p>
+    <hr />
+    <p class="mb-0">
+      <ul>
+        <li>
+          Select a book from the dropdown menu
+        </li>
+        <li>
+          The X-axis will change according to the time period the book was in the Bestsellers list 
+        </li>
+        <li>
+          Read more about the book at the bottom of the chart or visit it's Amazon page from the link button
+        </li>
+      </ul>
+    </p>
+  </div>
+
+  <!-- Initialize a select button -->
+  <select id="selectButton"></select>
+
+  <!-- amazon product link-->
+  <a class="btn btn-secondary" id="linkButton" href="#" target="_blank"
+    >Amazon Link</a
+  >
+  <div id="my_dataviz"></div>
+
+  <!--More info on books-->
+  <div class="alert alert-primary" role="alert" id="bookInfo">
+    <span><h4 class="alert-heading">Book Description</h4></span>
+    <hr />
+    <h5 id="author"></h5>
+    <hr />
+    <h5 id="publisher"></h5>
+    <hr />
+    <h5 id="desc"></h5>
+    <hr />
+  </div>
+
+  <!-- Color Scale -->
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <!-- The graph rendering-->
+  <script>
+    // set the dimensions and margins of the graph
+    var margin = { top: 10, right: 30, bottom: 50, left: 60 },
+      width = 1400 - margin.left - margin.right,
+      height = 450 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3
+      .select("#my_dataviz")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    //Read the data
+    d3.csv("final_data.csv", function(data) {
+      // List of groups (here I have one group per column)
+      var allGroup = d3
+        .map(data, function(d) {
+          return d.name;
+        })
+        .keys();
+
+      var allLinks = d3
+        .map(data, function(d) {
+          return d.link;
+        })
+        .keys();
+
+      var restInfo = d3.extent(data, function(d) {
+        if (d.name == allGroup[0]) {
+          return new Array(d.author, d.publisher, d.desc);
+        }
+      });
+
+      // add the options to the button
+      d3.select("#selectButton")
+        .selectAll("myOptions")
+        .data(allGroup)
+        .enter()
+        .append("option")
+        .text(function(d) {
+          return d;
+        }) // text showed in the menu
+        .attr("value", function(d) {
+          return d;
+        }); // corresponding value returned by the button
+
+      var auth = d3.select("#author");
+      auth.append("text");
+      auth.text("Author: " + restInfo[0][0]);
+
+      var pub = d3.select("#publisher");
+      pub.append("text");
+      pub.text("Publisher: " + restInfo[0][1]);
+
+      var desc = d3.select("#desc");
+      desc.append("text");
+      desc.text("Short Description: " + restInfo[0][2]);
+
+      var linkButton = d3.select("#linkButton");
+      linkButton.append("a");
+      linkButton.attr("href", allLinks[0]);
+
+      // A color scale: one color for each group
+      var myColor = d3
+        .scaleOrdinal()
+        .domain(allGroup)
+        .range(d3.schemeSet2);
+
+      // add X axis
+      var x = d3
+        .scaleTime()
+        .domain(
+          d3.extent(data, function(d) {
+            if (d.name == allGroup[0]) {
+              return new Date(d.year);
+            }
+          })
+        )
+        .range([0, width])
+        .nice();
+
+      var x_axis = d3.axisBottom().scale(x);
+
+      svg
+        .append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(x_axis);
+
+      //axis label
+      svg
+        .append("text")
+        .attr(
+          "transform",
+          "translate(" + width / 2 + " ," + (height + margin.top + 25) + ")"
+        )
+        .style("text-anchor", "middle")
+        .style("stroke", "#ffa500")
+        .text("Dates");
+
+      // Add Y axis
+      var y = d3
+        .scaleLinear()
+        .domain([20, 1])
+        .range([height, 0]);
+
+      svg.append("g").call(
+        d3
+          .axisLeft()
+          .scale(y)
+          .ticks(19)
+      );
+
+      //axis label
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - height / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .style("stroke", "#ffa500")
+        .text("Ranks");
+
+      // Initialize line with first group of the list
+      var line = svg
+        .append("g")
+        .append("path")
+        .datum(
+          data.filter(function(d) {
+            return d.name == allGroup[0];
+          })
+        )
+        .attr(
+          "d",
+          d3
+            .line()
+            .x(function(d) {
+              return x(new Date(d.year));
+            })
+            .y(function(d) {
+              return y(+d.n);
+            })
+        )
+        .attr("stroke", function(d) {
+          return myColor("valueA");
+        })
+        .style("stroke-width", 3)
+        .style("fill", "none");
+
+      // A function that updates the chart
+      function update(selectedGroup) {
+        // Create new data with the selection
+        var dataFilter = data.filter(function(d) {
+          return d.name == selectedGroup;
+        });
+
+        let link = d3.extent(dataFilter, function(d) {
+          return d.link;
+        })[0];
+
+        restInfo = d3.extent(data, function(d) {
+          if (d.name == selectedGroup) {
+            return new Array(d.author, d.publisher, d.desc);
+          }
+        });
+
+        x.domain(
+          d3.extent(dataFilter, function(d) {
+            return new Date(d.year);
+          })
+        );
+
+        svg
+          .select(".x")
+          .transition()
+          .call(x_axis);
+
+        // Give these new data to update line
+        line
+          .datum(dataFilter)
+          .transition()
+          .duration(1000)
+          .attr(
+            "d",
+            d3
+              .line()
+              .x(function(d) {
+                return x(new Date(d.year));
+              })
+              .y(function(d) {
+                return y(+d.n);
+              })
+          )
+          .attr("stroke", function(d) {
+            return myColor(selectedGroup);
+          });
+
+        linkButton.attr("href", link);
+
+        auth.text("Author: " + restInfo[0][0]);
+
+        pub.text("Publisher: " + restInfo[0][1]);
+
+        desc.text("Short Description: " + restInfo[0][2]);
+      }
+
+      // When the button is changed, run the updateChart function
+      d3.select("#selectButton").on("change", function(d) {
+        // recover the option that has been chosen
+        var selectedOption = d3.select(this).property("value");
+        // run the updateChart function with this selected option
+        update(selectedOption);
+      });
+    });
+  </script>
+</body>
