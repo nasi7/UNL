@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script>
+      document.write(
+        '<script src="http://' +
+          (location.host || "localhost").split(":")[0] +
+          ':35729/livereload.js?snipver=1"></' +
+          "script>"
+      );
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+
+    <script src="node_modules/chart.js/Chart.min.js"></script>
+    <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald|Assistant:400,600|Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        padding: 50px;
+        background: #ee4540;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      .box {
+        /* display: flex;
+        flex-wrap: wrap;
+        align-content: space-around; */
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #bodyy {
+        background: #eaeded;
+      }
+
+      .jumbotron {
+        background: #ee4540;
+        min-height: 120px;
+      }
+
+      a {
+        color: #00b7ff;
+      }
+
+      .inv {
+        color: #2d132c;
+      }
+
+      #header,
+      #name {
+        font-family: "Assistant", sans-serif;
+      }
+
+      .navbar {
+        background: #2d132c;
+        font-family: "Oswald", sans-serif;
+        min-height: 165px;
+      }
+      .column {
+        float: left;
+        padding: 10px;
+      }
+
+      .left {
+        width: 30%;
+      }
+
+      .right {
+        width: 70%;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+
+    <title>Soccer Central</title>
+  </head>
+  <body>
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark shadow mb-5">
+      <a href="#"
+        ><img
+          src="https://user-images.githubusercontent.com/55255943/69840690-062caa80-1222-11ea-8f87-a13db594a333.png"
+          width="120"
+          height="110"
+          class="d-inline-block align-top"
+          alt=""
+      /></a>
+      <p class="inv">txt</p>
+      <a class="navbar-brand" href="#"
+        ><h1 class="display-3 text-light">Soccer Central</h1></a
+      >
+    </nav>
+    <div class="jumbotron text-light"></div>
+
+    <!-- body of the page -->
+    <div class="container-fluid">
+      <div class="row" id="bodyy">
+        <!-- left panel -->
+        <div class="column left shadow p-3 mb-5 rounded" id="spider_chart">
+          <h3 id="header" style="color:chocolate">Positional Stats</h3>
+          <br />
+          <small id="inf" class="form-text text-muted">
+            Player Overall plus potential increase for each position on the
+            field </small
+          ><br />
+          <div class="box">
+            <div class="d-inline p-1 bg-success text-white rounded">
+              LW {{player.LW}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              ST {{player.ST}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              CF {{player.CF}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RW {{player.RW}}
+            </div>
+          </div>
+          <br />
+          <div class="box">
+            <div class="d-inline p-1 bg-success text-white rounded">
+              LAM {{player.LAM}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              CAM {{player.CAM}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              CM {{player.CM}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RM {{player.RM}}
+            </div>
+          </div>
+          <br />
+          <div class="box">
+            <div class="d-inline p-1 bg-success text-white rounded">
+              LWB {{player.LWB}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              CDM {{player.CDM}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RCM {{player.RCM}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RWB {{player.RWB}}
+            </div>
+          </div>
+          <br />
+          <div class="box">
+            <div class="d-inline p-1 bg-success text-white rounded">
+              LB {{player.LB}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              LCB {{player.LCB}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RCB {{player.RCB}}
+            </div>
+            <div class="d-inline p-1 bg-success text-white rounded">
+              RB {{player.RB}}
+            </div>
+          </div>
+        </div>
+
+        <!-- display area -->
+        <div class="column right shadow p-3 mb-5  rounded">
+          <h3 style="color:chocolate">Player Bio</h3>
+          <div
+            class="row "
+            style="padding-bottom:20px; border-bottom: 1px solid #ccc;"
+          >
+            <div class="column">
+              <div id="name" class="column"><h4>{{player.Name}}</h4></div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <img src="{{ player.Photo }}" class="rounded" alt="..." />
+              </div>
+              <div
+                class="column"
+                style="padding-right:20px; border-right: 1px solid #ccc;"
+              >
+                <p>
+                  <img src="{{ player.Club_Logo }}" class="rounded" alt="..." />
+                  {{player.Club}}
+                </p>
+                <p>
+                  <img src="{{ player.Flag }}" class="rounded" alt="..." />
+                  {{player.Nationality}}
+                </p>
+                <p>
+                  Age: {{player.Age}}
+                </p>
+              </div>
+              <div
+                class="column"
+                style="padding-right:20px; border-right: 1px solid #ccc;"
+              >
+                Overall:
+                <div
+                  class="d-inline p-1 bg-info text-white rounded float-right"
+                >
+                  {{player.Overall}}
+                </div>
+                <p></p>
+                Potential:
+                <div
+                  class="d-inline p-1 bg-success text-white rounded float-right"
+                >
+                  {{player.Potential}}
+                </div>
+                <p></p>
+                Market Value: {{player.Value}}
+              </div>
+              <div
+                class="column"
+                style="padding-right:20px; border-right: 1px solid #ccc;"
+              >
+                Position: {{player.Position}}
+                <p></p>
+                Preferred Foot: {{player.Preferred_Foot}}
+                <p></p>
+                Work Rate: {{player.Work_Rate}}
+              </div>
+              <div class="column" style="width: 160px;">
+                Wage: {{player.Wage}}
+                <p></p>
+                Weak Foot:
+                <div
+                  id="weak_foot"
+                  class="d-inline p-1 bg-success text-white rounded float-right"
+                >
+                  {{player.Weak_Foot}}
+                </div>
+                <p></p>
+                Skill Moves:
+                <div
+                  class="d-inline p-1 bg-success text-white rounded float-right"
+                >
+                  {{player.SkillMoves}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row shadow rounded">
+            <div
+              class="column shadow rounded"
+              style="width: 180px;margin-left: 10px;"
+            >
+              <h4>Physical</h4>
+              Acceleration:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Acceleration}}
+              </div>
+              <p></p>
+              Sprint Speed:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.SprintSpeed}}
+              </div>
+              <p></p>
+              Agility:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Agility}}
+              </div>
+              <p></p>
+              Balance:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Balance}}
+              </div>
+              <p></p>
+              Jumping:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Jumping}}
+              </div>
+              <p></p>
+              Reaction:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Reactions}}
+              </div>
+              <p></p>
+              Stamina:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Stamina}}
+              </div>
+              <p></p>
+              Strength:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Strength}}
+              </div>
+            </div>
+            <div
+              class="column shadow rounded"
+              style="width: 180px; margin-left: 20px;"
+            >
+              <h4>Mental</h4>
+              Aggression:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Aggression}}
+              </div>
+              <p></p>
+              Positioning:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Positioning}}
+              </div>
+              <p></p>
+              Composure:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Composure}}
+              </div>
+              <p></p>
+              Interceptions:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Interceptions}}
+              </div>
+              <p></p>
+              Vision:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Vision}}
+              </div>
+            </div>
+            <div
+              class="column shadow rounded"
+              style="width: 180px; margin-left: 20px;"
+            >
+              <h4>Technical</h4>
+              Ball Control:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Ball_Control}}
+              </div>
+              <p></p>
+              Crossing:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Crossing}}
+              </div>
+              <p></p>
+              Curve:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Curve}}
+              </div>
+              <p></p>
+              Dribbling:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Dribbling}}
+              </div>
+              <p></p>
+              FK Accuracy:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.FKAccuracy}}
+              </div>
+              <p></p>
+              Finishing:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Finishing}}
+              </div>
+              <p></p>
+              Heading:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.HeadingAccuracy}}
+              </div>
+              <p></p>
+              Long Passing:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.LongPassing}}
+              </div>
+              <p></p>
+              Long Shots:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.LongShots}}
+              </div>
+              <p></p>
+              Penalties:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Penalties}}
+              </div>
+              <p></p>
+              Short Passing:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.ShortPassing}}
+              </div>
+              <p></p>
+              Shot Power:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.ShotPower}}
+              </div>
+              <p></p>
+              Sliding Tackle:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.SlidingTackle}}
+              </div>
+              <p></p>
+              Standing Tackle:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.StandingTackle}}
+              </div>
+              <p></p>
+              Volleys:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.Volleys}}
+              </div>
+            </div>
+            <div
+              class="column shadow rounded"
+              style="width: 180px; margin-left: 20px;"
+            >
+              <h4>GoalKeeping</h4>
+              GK Diving:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.GKDiving}}
+              </div>
+              <p></p>
+              GK Handling:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.GKHandling}}
+              </div>
+              <p></p>
+              GK Kicking:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.GKKicking}}
+              </div>
+              <p></p>
+              GK Positioning:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.GKPositioning}}
+              </div>
+              <p></p>
+              GK Reflexes:
+              <div class="d-inline p-1 bg-info text-white rounded float-right">
+                {{player.GKReflexes}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+      integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

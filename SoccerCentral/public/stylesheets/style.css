@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  background: #d4e6f1;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+}
+
+/* .jumbotron {
+  background-image: url(/resources/pictures/logo.jpg);
+  background-size: cover;
+  height: 100%;
+} */
+
+/* .jumbotron {
+  background-color: transparent !important;
+} */

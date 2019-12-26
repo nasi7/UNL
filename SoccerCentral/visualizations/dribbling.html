@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src= "https://d3js.org/d3.v4.js"></script>
+<!-- Create a div where the graph will take place -->
+<!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        padding: 50px;
+        background: #ee4540;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      .jumbotron {
+        background: #ee4540;
+        min-height: 120px;
+      }
+
+      a {
+        color: #00b7ff;
+      }
+
+      .inv {
+        color: #2d132c;
+      }
+
+      .navbar {
+        background: #2d132c;
+        font-family: "Oswald", sans-serif;
+        min-height: 165px;
+      }
+      .column {
+        float: left;
+        padding: 10px;
+      }
+
+      .left {
+        width: 30%;
+      }
+
+      .right {
+        width: 70%;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+
+    <title>Soccer Central</title>
+  </head>
+  <body>
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark shadow mb-5">
+      <img
+        src="https://user-images.githubusercontent.com/55255943/69840690-062caa80-1222-11ea-8f87-a13db594a333.png"
+        width="120"
+        height="110"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      <p class="inv">txt</p>
+      <a class="navbar-brand" href="http://localhost:3000"
+        ><h1 class="display-3 text-light">Soccer Central</h1></a
+      >
+    </nav>
+    <div class="jumbotron text-light"></div>
+<div class="container-fluid shadow p-3 mb-5 bg-white rounded">
+<h1 align ="justify">Ball Control Vs Dribbling</h1>
+
+<div id="my_dataviz"></div>
+</div>
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 50, right: 50, bottom: 60, left: 90},
+    width = 1400 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+d3.csv("khot.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 100])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+	
+	
+	// text label for the x axis
+  svg.append("text")             
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + margin.top + 5) + ")")
+      .style("text-anchor", "middle")
+      .text("Ball Control");
+ 	
+	//text label for y axis
+	svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Dribbling");
+
+
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.ball); } )
+      .attr("cy", function (d) { return y(d.dribbling); } )
+      .attr("r", 1.5)
+      .style("fill", "#69b3a2")
+
+})
+
+</script>

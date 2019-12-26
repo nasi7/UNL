@@ -1,0 +1,9 @@
+1. Query the database to find the stats and other attributes of players
+2. Find all the players of a club/national team.
+3. Add filters on 2. to diaplay players with certain attributes such as position/value/age etc.
+4. Corelate between age and overall rating
+5. Corelate between value and overall rating
+6. Corelate between age and potential
+7. Use k-mean clustering to segreggate players with similar features
+8. Calculate increase/decrease in overall rating or specific traits between 2018 and 2019 datasets
+9. Build a dream team with total budget as constraint

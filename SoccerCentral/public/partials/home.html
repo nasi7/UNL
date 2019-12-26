@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <script>
+      document.write(
+        '<script src="http://' +
+          (location.host || "localhost").split(":")[0] +
+          ':35729/livereload.js?snipver=1"></' +
+          "script>"
+      );
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+      integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald|Assistant:400,600|Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        padding: 50px;
+        background: #ee4540;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      #bodyy {
+        background: #eaeded;
+      }
+
+      .jumbotron {
+        background: #ee4540;
+        min-height: 120px;
+      }
+
+      a {
+        color: #00b7ff;
+      }
+
+      .inv {
+        color: #2d132c;
+      }
+
+      #header {
+        font-family: "Assistant", sans-serif;
+      }
+
+      .navbar {
+        background: #2d132c;
+        font-family: "Oswald", sans-serif;
+        min-height: 165px;
+      }
+      .column {
+        float: left;
+        padding: 10px;
+      }
+
+      .left {
+        width: 30%;
+      }
+
+      .right {
+        width: 70%;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+
+    <title>Soccer Central</title>
+  </head>
+  <body>
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark shadow mb-5">
+      <a
+        ><img
+          src="https://user-images.githubusercontent.com/55255943/69840690-062caa80-1222-11ea-8f87-a13db594a333.png"
+          width="120"
+          height="110"
+          class="d-inline-block align-top"
+          alt=""
+      /></a>
+      <p class="inv">txt</p>
+      <a class="navbar-brand"
+        ><h1 class="display-3 text-light">Soccer Central</h1></a
+      >
+    </nav>
+    <div class="jumbotron text-light"></div>
+
+    <!-- body of the page -->
+    <div class="container-fluid">
+      <div class="row" id="bodyy">
+        <!-- filter panel -->
+        <div class="column left shadow p-3 mb-5 rounded">
+          <h3 id="header" style="color:chocolate">Dashboard</h3>
+          <!-- Simple Search Bar -->
+          <div class="md-form">
+            <div class="form-group">
+              <!-- Search Input -->
+              <input
+                type="text"
+                class="form-control"
+                id="searchInput"
+                name="search"
+                placeholder="Search Here"
+                ng-model="searchKeyword"
+              />
+              <small id="passwordHelpBlockMD" class="form-text text-muted">
+                You can search by: Player Name, Club Name, Nationality, or
+                Position.
+              </small>
+            </div>
+          </div>
+          <!-- Simple Search Bar /-->
+          <!--/ Clear Button -->
+          <button
+            type="button"
+            ng-click="home.clear();"
+            class="btn btn-blue-grey btn-sm"
+            title="Clear Search Field"
+          >
+            Clear
+          </button>
+          <br />
+          <br />
+          <br />
+          <!-- Chart Options -->
+          <h3 id="header" style="color:chocolate">Charts</h3>
+          <a
+            class="btn btn-indigo btn-block"
+            href="http://localhost/compareAverage.html"
+            role="button"
+            title="More Info"
+            >Filter Chart</a
+          >
+          <a
+            class="btn btn-indigo btn-block"
+            href="http://localhost/bubble.html"
+            role="button"
+            title="More Info"
+            >Player Count VS Country</a
+          >
+          <a
+            class="btn btn-indigo btn-block"
+            href="http://localhost/dribbling.html"
+            role="button"
+            title="More Info"
+            >Ball Control VS Dribbling</a
+          >
+          <a
+            class="btn btn-indigo btn-block"
+            href="http://localhost/positionvsplayercountedit.html"
+            role="button"
+            title="More Info"
+            >Position VS Player Count</a
+          >
+          <a
+            class="btn btn-indigo btn-block"
+            href="http://localhost/countryoverall.html"
+            role="button"
+            title="More Info"
+            >Overall Average VS Country</a
+          >
+        </div>
+        <!-- display area -->
+        <div class="column right shadow p-3 mb-5 rounded">
+          <table class="table table-hover persist-area header-fixed">
+            <thead>
+              <tr
+                class="persist-header floating-header"
+                style="visibility:visible;"
+              >
+                <th scope="col"></th>
+                <th id="header" scope="col" style="color: indianred;">
+                  <h4>Name</h4>
+                </th>
+                <th id="header" scope="col" style="color: indianred;">
+                  <h4>Overall</h4>
+                </th>
+                <th id="header" scope="col" style="color: indianred;">
+                  <h4>Club</h4>
+                </th>
+                <th id="header" scope="col" style="color: indianred;">
+                  <h4>Market Value</h4>
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody
+              ng-repeat="player in allPlayers | filter: searchKeyword | limitTo: home.limit"
+            >
+              <tr>
+                <td>
+                  <img
+                    src="{{ player.Photo }}"
+                    class="rounded float-left"
+                    alt="..."
+                  />
+                </td>
+                <td>{{ player.Name }}</td>
+                <td>{{ player.Overall }}</td>
+                <td>{{ player.Club }}</td>
+                <td>{{ player.Value }}</td>
+                <td>
+                  <a
+                    class="btn btn-light-green"
+                    href="/#/api/allPlayers/{{player._id}}"
+                    role="button"
+                    title="More Info"
+                    >More</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!--/ Show More Button -->
+          <i
+            class="fa fa-chevron-circle-down fa-3x align-content-center"
+            ng-click="home.showMore();"
+            title="Show More"
+          ></i>
+          <!-- <button
+            type="button"
+            ng-click="home.showMore();"
+            class="btn btn-blue-grey "
+          >
+            Show More
+          </button> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

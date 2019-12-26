@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src= "https://d3js.org/d3.v4.js"></script>
+<!-- Create a div where the graph will take place -->
+<!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        padding: 50px;
+        background: #ee4540;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      .jumbotron {
+        background: #ee4540;
+        min-height: 120px;
+      }
+
+      a {
+        color: #00b7ff;
+      }
+
+      .inv {
+        color: #2d132c;
+      }
+
+      .navbar {
+        background: #2d132c;
+        font-family: "Oswald", sans-serif;
+        min-height: 165px;
+      }
+      .column {
+        float: left;
+        padding: 10px;
+      }
+
+      .left {
+        width: 30%;
+      }
+
+      .right {
+        width: 70%;
+      }
+
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+
+    <title>Soccer Central</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title></title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+      
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+      
+      google.charts.load('current', {
+        'packages':['geochart'],
+        // Note: you will need to get a mapsApiKey for your project.
+        // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+        'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+
+      function drawRegionsMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Overall'],
+          ['Germany', 85.28],
+          ['Brazil', 85.9],
+          ['Spain', 86.19],
+          ['France', 85],
+          ['Argentina', 84],
+          ['Italy', 83.95],
+          ['Belgium', 83.54],
+         ['Portugal',	82.76],
+         ['England',	81.9],
+					['Netherlands',	81],
+					['Croatia',	81],
+['Uruguay',	80.086],
+['Colombia',79.61],
+['Serbia',	78.85],
+['Denmark',	78.28],
+['Russia',	78.2],
+['Switzerland',	77.9],
+['Mexico',	77.9],
+['Turkey',	77.8],
+['Ivory Coast',	77.8],
+['Chile',	77.76],
+['Senegal',	77.71],
+['Austria',	77.23],
+['Poland'	,77.14],
+['Morocco',	77.04],
+['Ukraine',	76.8],
+['Sweden',	76.76],
+['Greece',	76.47],
+['Czech Republic',	76.47],
+['Algeria',	76.45],
+['Japan',	76.28],
+['Slovenia'	,76.2],
+['Cameroon',	76],
+['Paraguay',	75.8],
+['Ghana',	75.76],
+['Scotland',	75.62],
+['Finland',	75.52],
+['Bosnia Herzegovina',	75.47],
+['Nigeria',	75.14],
+['United States',	75.13],
+['Slovakia',	75.04],
+['Norway',	74.8],
+['Republic of Ireland',	74.14],
+['DR Congo',	74.09],
+['Romania',	73.9],
+['Wales',	73.55],
+['Venezuela',	73.5],
+['Mali',	73.42],
+['Australia'	,73.42],
+[' South Korea',	73.28],
+['South Africa',	72.95],
+['Peru',	72.95],
+['Ecuador',	72.63],
+['Egypt',	72.33],
+['Hungary',	72.14],
+['Iceland',	71.9],
+['Costa Rica',	71.57],
+['Tunisia',	71],
+['Guinea',	70.9],
+['Albania',	70.52],
+['Northern Ireland',	70.5],
+['Kosovo',	69.76],
+['Georgia',	69.61],
+['China',69.61],
+['Jamaica',	69.23],
+['Canada',69.09],
+['Bulgaria',67.9],
+['Bolivia',	67.42],
+['New Zealand',66.57],
+['Saudi Arabia',70.95]
+]);
+
+        var options = {};
+
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+        chart.draw(data, options);
+      }
+
+    }
+
+  //]]></script>
+
+</head>
+<body>
+<!--Nav Bar-->
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark shadow mb-5">
+      <img
+        src="https://user-images.githubusercontent.com/55255943/69840690-062caa80-1222-11ea-8f87-a13db594a333.png"
+        width="120"
+        height="110"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      <p class="inv">txt</p>
+      <a class="navbar-brand" href="http://localhost:3000"
+        ><h1 class="display-3 text-light">Soccer Central</h1></a
+      >
+    </nav>
+    <div class="jumbotron text-light"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<div class="container-fluid shadow p-3 mb-5 bg-white rounded">
+	<h1 align="center">Average Player Overall by Country</h1> 
+       <div id="regions_div" style="width: 1400px; height: 500px;"></div>
+	   </div>
+   
+
+  
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "cfynm2v3"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>

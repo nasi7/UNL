@@ -1,0 +1,160 @@
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage[margin=1in]{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{}\rfoot{}
+
+%%% Packages
+\usepackage{tabularx} %Better Tables
+\usepackage{amsmath} %Better Tables
+\usepackage{graphicx}
+
+%%% CUSTOM COMMANDS
+% To define a Problem
+\usepackage{etoolbox} %Counter.
+\newcounter{problem}
+\newcommand*{\problem}[2]{\vspace{.5cm}\textbf{\Large{Problem \addtocounter{problem}{1}\arabic{problem} [#1]}} \hfill Topic: \emph{#2}\\\\\indent}
+% To define a 8 bit box area
+\newcolumntype{b}{>{\hsize=.5\hsize\centering}X}
+\DeclareListParser*{\iterateparticipants}{,}
+\newcommand*{\eightbit}[8]{
+ 	{\LARGE
+		\begin{tabularx}{.6\textwidth}{| b | b | b | b | b | b | b | b | } \hline
+			#1 & #2 & #3 & #4 & #5 & #6 & #7 & #8 \\\hline
+		\end{tabularx}
+	}
+}
+
+\newcommand{\tab}{\hspace*{2em}}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\newcommand{\comment}[1]{\emph{\textcolor{red}{[#1]}}}
+
+\begin{document}
+
+\lhead{Due: October 10, 2016}
+\rhead{\bfseries Name (Last, First):\tab\tab\tab\tab}
+
+\begin{center}
+	\Large{
+		\textbf{
+			CSCE 230, Fall 2016\\ %
+ 			Homework 4
+		}
+	}
+\end{center}
+
+
+\noindent\textbf{\emph{Notes:}}
+	\begin{itemize}
+		\item  {\huge\textbf{Read all of the instructions.}}
+		\item 	\textbf{This assignment must be typed.} Assignments which are not typed will not be graded.
+		\item 	A \underline{hard copy} \textbf{and} an \underline{electronic copy} must be submitted by the beginning of class on the due date.
+		\item   The electronic copy must be named as follows: \\ \tab homework\_04\_lastname\_firstname.pdf
+		\item 	Staple this coversheet to your completed assignment.
+		
+	\end{itemize}\vspace{.5cm}
+
+\noindent\textbf{\emph{Material Covered:}}
+	\begin{itemize}
+		\item[] Appendix A
+	\end{itemize}\vspace{.5cm}
+
+\noindent\textbf{\emph{Rubric:}}\\
+\begin{center}
+	{\renewcommand{\arraystretch}{2.75}
+		\begin{tabularx}{\textwidth}{|>{\centering\huge\arraybackslash}X|>{\centering\huge\arraybackslash}X|>{\centering\huge\arraybackslash}X|>{\centering\arraybackslash}X|} \hline
+			{\LARGE Problem Number} & {\LARGE Possible Points} & {\LARGE Points Earned} \\ \hline
+			1 & 20 & \\\hline
+			2 & 20 & \\\hline
+			3 & 20 & \\\hline
+			4 & 20 & \\\hline
+			5 & 20 & \\\hline
+
+			\multicolumn{2}{r|}{\huge{Total:}} & \\\cline{3-3}
+	\end{tabularx}}
+\end{center}
+
+%Reset header style
+\newpage\renewcommand{\headrulewidth}{0pt}\rhead{Homework 4}\chead{CSCE230 Spring 2016}
+
+%Note: For these problems you can use \bar{} to define a variable as its inverse. For multiple variables, such as in part B, \overline{} because \bar{} only makes a line the width of approximately one character.  
+
+\problem{20}{Logic Functions}
+Prove the following equivalences by  \textbf{using boolean algebraic manipulation and also by using truth tables.} If any of the following are not equivalent, demonstrate how this was found. \textbf{All work must be shown}, including boolean axioms used.
+
+\begin{enumerate}
+
+
+\item[a)] $\overline{x_1 \bigoplus x_2} \bigoplus x_3 = \bar{x_1}\bar{x_2}\bar{x_3} + x_1x_2\bar{x_3} + \bar{x_1}x_2x_3 + x_1\bar{x_2}x_3$
+
+
+
+\item[b)] $\bar{x_2}x_1 + x_3\bar{x_2} + \bar{x_1}x_3 = \bar{x_2}x_1 + x_3\bar{x_1} $
+
+
+
+\end{enumerate}\vspace{-1em}
+
+\problem{20}{Logic Functions}
+
+Consider the logic expressions:\\
+$f = x_1 \bar{x_2} \bar{x_5} + \bar{x_1} \bar{x_2 } \bar{x_4 } \bar{x_5} + x_1 x_2 x_4 x_5 + \bar{x_1 } \bar{x_2 } x_3 \bar{x_4} + x_1 \bar{x_2} x_3 x_5 + \bar{x_2 } \bar{x_3 } x_4 \bar{x_5} + x_1 x_2 x_3 x_4 \bar{x_5}$ \\
+$g = \bar{x_2 } x_3 \bar{x_4} + \bar{x_2 } \bar{x3} \bar{x_4 } \bar{x_5}  + x_1 x_3 x_4 \bar{x_5} + x_1 \bar{x_2} x_4 \bar{x_5} + x_1 x_3 x_4 x_5 +  \bar{x_1} \bar{x_2 } \bar{x_3 } \bar{x_5}+ x_1 x_2 \bar{ x_3} x_4 x_5$ \\
+Prove or disprove using Boolean algebraic manipulations (\underline{no} truth table or Karnaugh maps) that, $ f = g$
+
+\problem{20}{Karnaugh Maps}
+Create a truth table for each of the following, then use Karnaugh Maps to minimize the functions
+
+\begin{enumerate}
+\item[a)] $f(x_1,x_2,x_3) = \bar{x_1}x_2x_3 + \bar{x_1}x_2\bar{x_3} + \bar{x_1}\bar{x_2}x_3 + x_1x_2\bar{x_3}$
+\item[b)] $f(x_1,x_2,x_3,x_4) = \bar{x_1}\bar{x_2}\bar{x_3}x_4 + \bar{x_1}x_2\bar{x_3}\bar{x_4} + \bar{x_1}x_2\bar{x_3}x_4 + \bar{x_1}\bar{x_2}x_3\bar{x_4} + x_1\bar{x_2}\bar{x_3}\bar{x_4} + x_1\bar{x_2}x_3\bar{x_4} + x_1x_2\bar{x_3}\bar{x_4} + x_1x_2x_3\bar{x_4} + x_1x_2x_3\bar{x_4}$
+\end{enumerate}\vspace{-1em}
+
+\problem{20}{Logic Circuits}
+For the minimized functions in Problem 3, design the circuits using gate symbols. \\\textbf{\textit{Note:}} for this problem you can use a circuit design tool such as Quartus, or draw your circuit. In both cases, include an image of your circuit in your document. 
+
+\newpage
+
+\problem{20}{Logic Design}
+
+Suppose a room has three doors and one bulb in the middle. Beside, each door there is a switch for controlling the bulb to turn ON or OFF. Now, the bulb is controlled by those three switches according to the following logic:
+
+\begin{itemize}
+    \item When an odd number of switches are closed (i.e. logically HIGH, or 1), the bulb is ON.
+    \item In the remaining cases, the bulb is OFF.
+\end{itemize}
+
+Design a logic circuit that can provide this functionality. Show the truth table of the logic design.
+
+
+\end{document}
